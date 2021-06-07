@@ -1,0 +1,81 @@
+<section>
+  <form name='form.frmAddInventry' novalidate>
+    <div class="box-gray" ng-form name="form.frmAddInventry">
+      <div class="box">
+        <div>
+          <div class="box-content">
+            <div class="box-detail">
+              <div class="box-title">
+                <h3>Basic Details</h3>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Inventry Name*</label>
+                    <input type="text" maxlength="80" name="inventry_name" class="form-control"
+                      ng-model="createInventry.Name" required>
+                    <span style='color:red;'
+                      ng-show='form.frmAddInventry.inventry_name.$error.required && isSubmit'>Please Enter Inventry
+                      Name</span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Inventry Description*</label>
+                    <input type="text" maxlength="80" name="inventry_name" class="form-control"
+                      ng-model="createInventry.Description" required>
+                    <span style='color:red;'
+                      ng-show='form.frmAddInventry.Description.$error.required && isSubmit'>Please Enter
+                      Description</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label>Price*</label>
+                    <input type="text" maxlength="80" name="price" class="form-control" ng-model="createInventry.Price"
+                      required>
+                    <span style='color:red;' ng-show='form.frmAddInventry.price.$error.required && isSubmit'>Please
+                      Enter Price</span>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label>Retail Price*</label>
+                    <input type="text" maxlength="80" name="Retail_Price" class="form-control"
+                      ng-model="createInventry.Retail_Price" required>
+                    <span style='color:red;'
+                      ng-show='form.frmAddInventry.Retail_Price.$error.required && isSubmit'>Please Enter Price</span>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label>Category</label>
+                    <input type="text" maxlength="80" name="Brand" class="form-control" ng-model="createInventry.Category"
+                      required>
+                    <span style='color:red;' ng-show='form.frmAddInventry.Category.$error.required && isSubmit'>Please
+                      Enter Category Name</span>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label>Brand</label>
+                    <input type="text" maxlength="80" name="Brand" class="form-control" ng-model="createInventry.Brand"
+                      required>
+                    <span style='color:red;' ng-show='form.frmAddInventry.Brand.$error.required && isSubmit'>Please
+                      Enter Brand Name</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer d-flex justify-content-center">
+      <button ng-click='createInventry={}' class="btn btn-default">Reset</button><!-- ng-disabled='!guestUserLogoutDetailsForm.$valid' -->
+      <button  ng-click='addItemToInventry(createInventry)' class="btn btn-primary">Add</button>
+    </div>
+  </form>
+</section>

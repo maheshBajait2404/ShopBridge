@@ -1,0 +1,88 @@
+<section>
+    <form name='form.frmEditInventry' novalidate>
+        <div class="box-gray" ng-form name="form.frmEditInventry">
+            <div class="box">
+                <div>
+                    <div class="box-content">
+                        <div class="box-detail">
+                            <div class="box-title">
+                                <h3>Basic Details</h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Inventry Name*</label>
+                                        <input type="text" maxlength="80" name="inventry_name" class="form-control"
+                                            ng-model="editInventry.Name" required>
+                                        <span style='color:red;'
+                                            ng-show='form.frmEditInventry.inventry_name.$error.required && isSubmit'>Please
+                                            Enter Inventry
+                                            Name</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Inventry Description*</label>
+                                        <input type="text" maxlength="80" name="inventry_name" class="form-control"
+                                            ng-model="editInventry.Description" required>
+                                        <span style='color:red;'
+                                            ng-show='form.frmEditInventry.Description.$error.required && isSubmit'>Please
+                                            Enter
+                                            Description</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Price*</label>
+                                        <input type="text" maxlength="80" name="price" class="form-control"
+                                            ng-model="editInventry.Price" required>
+                                        <span style='color:red;'
+                                            ng-show='form.frmEditInventry.price.$error.required && isSubmit'>Please
+                                            Enter Price</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Retail Price*</label>
+                                        <input type="text" maxlength="80" name="Retail_Price" class="form-control"
+                                            ng-model="editInventry.Retail_Price" required>
+                                        <span style='color:red;'
+                                            ng-show='form.frmEditInventry.Retail_Price.$error.required && isSubmit'>Please
+                                            Enter Price</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Category</label>
+                                        <input type="text" maxlength="80" name="Brand" class="form-control"
+                                            ng-model="editInventry.Category" required>
+                                        <span style='color:red;'
+                                            ng-show='form.frmEditInventry.Category.$error.required && isSubmit'>Please
+                                            Enter Category Name</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Brand</label>
+                                        <input type="text" maxlength="80" name="Brand" class="form-control"
+                                            ng-model="editInventry.Brand" required>
+                                        <span style='color:red;'
+                                            ng-show='form.frmEditInventry.Brand.$error.required && isSubmit'>Please
+                                            Enter Brand Name</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+            <button ng-click='editInventry={}' class="btn btn-default">Reset</button>
+            <!-- ng-disabled='!guestUserLogoutDetailsForm.$valid' -->
+            <button ng-click='addItemToInventry(editInventry)' class="btn btn-primary">Update</button>
+        </div>
+    </form>
+</section>

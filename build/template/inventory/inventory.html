@@ -1,0 +1,30 @@
+<div class="inventrys-container">
+    <div style="display: flex ; justify-content: flex-end;">
+        <div class="col-sm-12">
+            <button class="btn btn-primary" ui-sref='createInventry'>Add</button>
+         </div>
+    </div>
+    <div class="inventrys">
+      <div ng-repeat="data in inventryData" >
+        <div class="inventry">
+            <img class="inventry-logo" ng-src="{{ data.image_thumnil }}"/>
+            <h3 class="inventry-h3">
+              {{ data.Name }}
+            </h3>
+            <p>{{ data.Description | limitTo:100}}</p>
+            <p>Price:{{ data.Price }}</p>
+            <div style="display: flex ; justify-content: flex-end;">
+                <button  data-toggle="tooltip" title="" uib-tooltip="View" ng-click="viewInventryData(data)">
+                    <i class="ti-eye"></i>
+                </button>
+                <button  data-toggle="tooltip" title="" uib-tooltip="View" ng-click="editInventryData(data)">
+                    <i class="ti-pencil"></i>
+                </button>
+                <button  data-toggle="tooltip" title="" uib-tooltip="View" ng-click="deleteInventry(data)">
+                    <i class="ti-trash"></i>
+                </button>
+            </div>
+          </div>
+      </div>
+    </div>    
+</div>
