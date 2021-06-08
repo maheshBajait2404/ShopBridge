@@ -1,19 +1,23 @@
 <div class="inventrys-container">
+  
     <div style="display: flex ; justify-content: flex-end;">
-        <div class="col-sm-12">
+        <div class="action-btn">
+          <span style="padding: 20px 9px;font-size: 14px;"><b>Total</b> : {{inventryData.length}}</span>
+            <input type="text" name="" placeholder="Search Data" ng-model="searchData" style="padding: 5px 9px;">
             <button class="btn btn-primary" ui-sref='createInventry'>Add</button>
          </div>
     </div>
     <div class="inventrys">
-      <div ng-repeat="data in inventryData" >
-        <div class="inventry">
+      <div ng-repeat="data in inventryData | filter :searchData"  class="inventry">
+        <div > 
             <img class="inventry-logo" ng-src="{{ data.image_thumnil }}"/>
             <h3 class="inventry-h3">
-              {{ data.Name }}
+              {{ data.name }}
             </h3>
-            <p>{{ data.Description | limitTo:100}}</p>
-            <p>Price:{{ data.Price }}</p>
-            <div style="display: flex ; justify-content: flex-end;">
+            <p>{{ data.description | limitTo:100}}</p>
+            <p class="price">Price: ${{ data.price }}</p>
+             <p class="price">Count: {{ data.count }}</p>
+            <div class="actions-btn" style="display: flex ; justify-content: flex-end;">
                 <button  data-toggle="tooltip" title="" uib-tooltip="View" ng-click="viewInventryData(data)">
                     <i class="ti-eye"></i>
                 </button>
@@ -26,5 +30,8 @@
             </div>
           </div>
       </div>
+      <div ng-if="(inventryData | filter :searchData).length==0" >
+         <h3 style="text-align: center;color: #212121;padding: 141px 514px;font-size: 18px;margin: 0;">There is no Item in list.</h3>
+    </div>
     </div>    
 </div>

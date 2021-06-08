@@ -1,19 +1,15 @@
 'use strict';
 angular.module('myApp')
-    .controller('viewInventoryController', function ($scope,$http,$stateParams) {
-        $scope.getInventry = function(){
-            $http(
-                {
-                  method: 'GET', 
-                  url: 'inventry.json'
-                }).then(function(response) {
-                  $scope.inventryData = response.data
-                  angular.forEach(response.data,function(value,key){
-                      if(value.Product_ID==$stateParams.id){
-                        $scope.inventryData=value;
-                      }
-                  })
-                });
+    .controller('viewInventoryController', function ($scope,$rootScope,$http,$stateParams,inventryService) {
+        $scope.getInventryDetails = function(){
+          $rootScope.showLoader=true;
+             inventryService.getInventryDetailsService($stateParams.id)
+                  .then(function (response) {
+                    $rootScope.showLoader=false;
+                        $scope.inventryData = response.data
+                     },function (error) {
+                       $rootScope.showLoader=false;
+                   });
           }
-          $scope.getInventry();     
+          $scope.getInventryDetails();     
     });

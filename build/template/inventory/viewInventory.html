@@ -1,3 +1,8 @@
+<div >
+  <button class="btn btn-default" ui-sref="inventory">
+      <span class="ti-arrow-left" ></span> Back
+   </button>
+ </div>
 <section>
     <div class="box-gray">
         <div class="box">
@@ -8,51 +13,47 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Inventry Name*</label>
-                                    <input type="text" maxlength="80" name="inventry_name" class="form-control"
-                                        ng-model="inventryData.Name" required>
-
+                                    <span class="value-data">{{inventryData.name}}</span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Inventry Description*</label>
-                                    <input type="text" maxlength="80" name="inventry_name" class="form-control"
-                                        ng-model="inventryData.Description" required>
-
+                                  <span class="value-data">{{inventryData.description}}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Price*</label>
-                                    <input type="text" maxlength="80" name="price" class="form-control"
-                                        ng-model="inventryData.Price" required>
-
+                                     <span class="value-data">{{inventryData.price}}</span>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Retail Price*</label>
-                                    <input type="text" maxlength="80" name="Retail_Price" class="form-control"
-                                        ng-model="inventryData.Retail_Price" required>
-
+                                    <label>Count</label>
+                                        <span class="value-data">{{inventryData.count}}</span>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Category</label>
-                                    <input type="text" maxlength="80" name="Brand" class="form-control"
-                                        ng-model="inventryData.Category" required>
-
+                                    <label>Department</label>
+                                   <span class="value-data">{{inventryData.Department}}</span>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Brand</label>
-                                    <input type="text" maxlength="80" name="Brand" class="form-control"
-                                        ng-model="inventryData.Brand" required>
-
+                                    <label>Color</label>
+                                    <span class="value-data">{{inventryData.Color}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Created At</label>
+                                    <span class="value-data">{{inventryData.createdAt| date:'short'}}</span>
                                 </div>
                             </div>
                         </div>
