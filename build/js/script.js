@@ -75,22 +75,39 @@ angular.module('myApp')
     }
     /*Create inventry services*/
     factory.createInventryService = function(data){
-        var mockData=[]
-        mockData.push(data);
+        var mockData={
+            'name': data.name,
+            'description': data.description,
+            'price':data.price,
+            'count':data.count,
+            'Department':data.Department,
+            'Color':data.Color
+        }
         return $http({
             'method': 'POST',
+            "auth": "51349d7defd9351ac",
+            "Content-Type": "application/json" ,
             'url':  "https://60bf56c797295a0017c4271f.mockapi.io/api/shopbrige/inventryLists",
-            '$mockData': mockData
+            'data': mockData
         })
     }
     /*Update inventry data*/
-     factory.updateInventryService = function(data){
-        var mockData=[]
-        mockData.push(data);
+     factory.updateInventryService = function(id,data){
+        var mockData={
+            'name': data.name,
+            'description': data.description,
+            'price':data.price,
+            'count':data.count,
+            'Department':data.Department,
+            'Color':data.Color
+        }
         return $http({
             'method': 'PUT',
-            'url':  "https://60bf56c797295a0017c4271f.mockapi.io/api/shopbrige/inventryLists/"+data,
-            '$mockData': mockData
+            "auth": "51349d7defd9351ac",
+             "Content-Type": "application/json" ,
+            'url':  "https://60bf56c797295a0017c4271f.mockapi.io/api/shopbrige/inventryLists/"+id,
+            'data':mockData
+              //+"/"+ mockData
         })
     }
     return factory;
@@ -132,15 +149,16 @@ angular.module('myApp')
 'use strict';
 angular.module('myApp')
     .controller('createInventryController', function ($scope,$rootScope,inventryService,$state) {
+        
+        /*insert inventry data to filed*/
         $scope.addItemToInventry=function(data){
           $scope.isSubmit=true;
           if ($scope.form['frmAddInventry'].$valid) {
             $scope.isSubmit=false;
               $rootScope.showLoader=true;
-          inventryService.createInventryService(data)
+            inventryService.createInventryService(data)
               .then(function (response) {
-                 console.log(response)
-                     $.growl.notice({ title: "Success", message:'Data created Successfully'}); 
+                    $.growl.notice({ title: "Success", message:'Data created Successfully'}); 
                      $rootScope.showLoader=false;
 
                       $state.go('inventory');
@@ -149,7 +167,6 @@ angular.module('myApp')
                     $rootScope.showLoader=false;
                });
           }
-          
         }
     });
     
@@ -157,6 +174,7 @@ angular.module('myApp')
 'use strict';
 angular.module('myApp')
     .controller('editInventryController', function ($scope,$http,$stateParams,$rootScope,inventryService,$state) {
+       /*get inventry details*/
         $scope.getInventry = function(){
           $rootScope.showLoader=true;
            inventryService.getInventryDetailsService($stateParams.id)
@@ -165,16 +183,16 @@ angular.module('myApp')
                        $rootScope.showLoader=false;
                      },function (error) {
                     $rootScope.showLoader=false;
-                   });
+               });
            }
-          $scope.getInventry();      
-
+          $scope.getInventry();
+               
+          /*update inventry data*/
            $scope.updateInventry=function(data){
             $rootScope.showLoader=true;
-             inventryService.updateInventryService(data)
+             inventryService.updateInventryService($stateParams.id,data)
               .then(function (response) {
-                 console.log(response)
-                    $scope.inventryData = response.data
+                 $scope.inventryData = response.data
                      $.growl.notice({ title: "Success", message:'Data Updated Successfully'}); 
                      $rootScope.showLoader=false;
                       $state.go('inventory');
@@ -186,41 +204,41 @@ angular.module('myApp')
 'use strict';
 angular.module('myApp')
    .controller('inventoryController', function($scope, $rootScope ,$http, $state, inventryService) {
+    
+      /* get the inventry item list*/
       $scope.getInventryData = function() {
          $rootScope.showLoader=true;
          inventryService.getInventryDataService()
             .then(function(response) {
-               console.log(response)
-               $scope.inventryData = response.data
+             $scope.inventryData = response.data
                 $rootScope.showLoader=false;
             }, function(error) {
                 $rootScope.showLoader=false;
             });
       }
       $scope.getInventryData();
-
+      /*delete inventry item*/
       $scope.deleteInventry = function(value) {
+      swal({
+          title: "Are you sure?",
+          text: "You will not be able to recover this imaginary file!",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes, delete it!",
+          closeOnConfirm: true
+        },
+        function(){
+          $rootScope.showLoader=true;
+        inventryService.deleteInventryService(value.id).then(function(response){
+            $scope.getInventryData();
+            $.growl.notice({ title: "Success", message:'Data deleted Successfully'});   
+            $rootScope.showLoader=false;
+          },function (error) {
+        });
+        });
+       }
       
-     swal({
-      title: "Are you sure?",
-      text: "You will not be able to recover this imaginary file!",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#DD6B55",
-      confirmButtonText: "Yes, delete it!",
-      closeOnConfirm: true
-    },
-    function(){
-      $rootScope.showLoader=true;
-     inventryService.deleteInventryService(value.id).then(function(response){
-        $scope.getInventryData();
-        $.growl.notice({ title: "Success", message:'Data deleted Successfully'});   
-         $rootScope.showLoader=false;
-      },function (error) {
-     });
-    });
-
-      }
       // add item to inventry list
       $scope.addInventryData = function() {
          $state.go('createInventry');
@@ -242,6 +260,7 @@ angular.module('myApp')
 'use strict';
 angular.module('myApp')
     .controller('viewInventoryController', function ($scope,$rootScope,$http,$stateParams,inventryService) {
+        /*get the detail of inventry item*/
         $scope.getInventryDetails = function(){
           $rootScope.showLoader=true;
              inventryService.getInventryDetailsService($stateParams.id)

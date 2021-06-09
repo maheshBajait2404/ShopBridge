@@ -28,22 +28,39 @@ angular.module('myApp')
     }
     /*Create inventry services*/
     factory.createInventryService = function(data){
-        var mockData=[]
-        mockData.push(data);
+        var mockData={
+            'name': data.name,
+            'description': data.description,
+            'price':data.price,
+            'count':data.count,
+            'Department':data.Department,
+            'Color':data.Color
+        }
         return $http({
             'method': 'POST',
+            "auth": "51349d7defd9351ac",
+            "Content-Type": "application/json" ,
             'url':  "https://60bf56c797295a0017c4271f.mockapi.io/api/shopbrige/inventryLists",
-            '$mockData': mockData
+            'data': mockData
         })
     }
     /*Update inventry data*/
-     factory.updateInventryService = function(data){
-        var mockData=[]
-        mockData.push(data);
+     factory.updateInventryService = function(id,data){
+        var mockData={
+            'name': data.name,
+            'description': data.description,
+            'price':data.price,
+            'count':data.count,
+            'Department':data.Department,
+            'Color':data.Color
+        }
         return $http({
             'method': 'PUT',
-            'url':  "https://60bf56c797295a0017c4271f.mockapi.io/api/shopbrige/inventryLists/"+data,
-            '$mockData': mockData
+            "auth": "51349d7defd9351ac",
+             "Content-Type": "application/json" ,
+            'url':  "https://60bf56c797295a0017c4271f.mockapi.io/api/shopbrige/inventryLists/"+id,
+            'data':mockData
+              //+"/"+ mockData
         })
     }
     return factory;

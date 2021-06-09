@@ -1,6 +1,7 @@
 'use strict';
 angular.module('myApp')
     .controller('editInventryController', function ($scope,$http,$stateParams,$rootScope,inventryService,$state) {
+       /*get inventry details*/
         $scope.getInventry = function(){
           $rootScope.showLoader=true;
            inventryService.getInventryDetailsService($stateParams.id)
@@ -9,16 +10,16 @@ angular.module('myApp')
                        $rootScope.showLoader=false;
                      },function (error) {
                     $rootScope.showLoader=false;
-                   });
+               });
            }
-          $scope.getInventry();      
-
+          $scope.getInventry();
+               
+          /*update inventry data*/
            $scope.updateInventry=function(data){
             $rootScope.showLoader=true;
-             inventryService.updateInventryService(data)
+             inventryService.updateInventryService($stateParams.id,data)
               .then(function (response) {
-                 console.log(response)
-                    $scope.inventryData = response.data
+                 $scope.inventryData = response.data
                      $.growl.notice({ title: "Success", message:'Data Updated Successfully'}); 
                      $rootScope.showLoader=false;
                       $state.go('inventory');
